@@ -1,0 +1,49 @@
+{
+  "name": "cardsworth",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Create printable RPG item & character cards sized to standard Magic: The Gathering cards (63.5 × 88.9 mm).",
+  "license": "Apache-2.0",
+  "homepage": "https://thebigs.github.io/cardsworth/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheBigS/cardsworth.git"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "server": "tsx server.ts",
+    "start": "npm run build && npm run server"
+  },
+  "dependencies": {
+    "changedpi": "^1.0.4",
+    "express": "^4.21.0",
+    "html-to-image": "^1.11.13",
+    "js-yaml": "^4.1.1",
+    "marked": "^17.0.4",
+    "playwright": "^1.60.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/express": "^4.17.21",
+    "@types/js-yaml": "^4.0.9",
+    "@types/marked": "^5.0.2",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "tsx": "^4.19.0",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.18.2",
+    "vite": "^6.0.5"
+  }
+}

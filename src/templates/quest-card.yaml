@@ -1,0 +1,31 @@
+id: quest-card
+name: Quest Card
+front: |
+  # Quest Title
+
+  **Type:** Main Quest
+  **Difficulty:** Medium
+
+  ## Objective
+  What the party needs to accomplish.
+
+  ## Reward
+  - 500 gold pieces
+  - *Magical item*
+  - **Reputation gain**
+back: |
+  # Quest Details
+
+  ## Background
+  The story behind this quest.
+
+  ## Key NPCs
+  - **Quest Giver:** Name
+  - **Antagonist:** Name
+
+  ## Locations
+  - Starting point
+  - Destination
+
+  ## Complications
+  Potential twists or obstacles.

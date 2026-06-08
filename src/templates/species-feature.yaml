@@ -1,0 +1,24 @@
+id: species-feature
+name: Species Feature
+front: |
+  # Feature Name
+
+  **Species:** Elf
+
+  ## Description
+  Description of the species feature goes here.
+
+  ## Benefit
+  - Specific mechanical benefit
+  - *Additional effect*
+back: |
+  # Lore
+
+  ## Origin
+  The history behind this trait.
+
+  ## Cultural Significance
+  How this trait affects the species' culture.
+
+  ## Variants
+  Different manifestations across subraces.

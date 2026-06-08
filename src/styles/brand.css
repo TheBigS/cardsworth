@@ -1,0 +1,104 @@
+/* ============================================================================
+   Cardsworth brand lockup — header styles.
+   Pairs with <BrandHeader /> in components/Logo.tsx.
+   This app doesn't define --brand / --font-display / --font-ui design tokens,
+   so the literal fallbacks below apply (burgundy #540000, Cinzel, Alegreya Sans).
+   ============================================================================ */
+
+/* Space-between row: Cardsworth lockup on the left, GitHub Source link right. */
+.brand-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 0 18px 0;
+  color: var(--brand, #540000); /* drives the mark via currentColor */
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+/* GitHub Source link — icon-only button in the header's right gutter. */
+.source-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  margin-top: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  border: 1px solid #d8d0c0;
+  color: #6b5d49;
+  background: transparent;
+  text-decoration: none;
+  transition: color 0.14s, border-color 0.14s, background 0.14s;
+}
+
+.source-link:hover {
+  color: #540000;
+  border-color: #540000;
+  background: rgba(84, 0, 0, 0.04);
+}
+
+.gh-mark {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  display: block;
+}
+
+/* The mark, light theme (on the parchment/cream editor header). Each fill is a
+   --cw-* custom property so the one SVG re-themes per context (see below). */
+.brand-mark {
+  width: 62px;
+  height: auto;
+  flex: none;
+  display: block;
+  --cw-ink: currentColor; /* tracks the header color = brand burgundy */
+  --cw-brass: #b9923a;
+  --cw-brass-dark: #8b6914;
+  --cw-garnet: #7c1f1f;
+  --cw-lens: #fbf6ea;
+}
+
+/* Inverted theme for the mark on a DARK/burgundy surface (apply this class). */
+.brand-mark--on-dark {
+  --cw-ink: #f4ecd8;
+  --cw-brass: #cf9a44;
+  --cw-brass-dark: #a06f28;
+  --cw-garnet: #e8c98a;
+  --cw-lens: #3a0b0b;
+}
+
+/* Monochrome cream silhouette for a watermark (e.g. the self-host callout). */
+.brand-mark--watermark {
+  --cw-ink: #f4ecd8;
+  --cw-brass: #f4ecd8;
+  --cw-brass-dark: #f4ecd8;
+  --cw-garnet: #f4ecd8;
+  --cw-lens: transparent;
+}
+
+.brand-name {
+  font-family: var(--font-display, 'Cinzel', Georgia, serif);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  color: var(--brand, #540000);
+}
+
+.brand-sub {
+  font-family: var(--font-ui, 'Alegreya Sans', sans-serif);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #a08a5c; /* muted brass */
+  margin-top: 5px;
+  padding-left: 6px; /* optical-aligns the tracked caps under the "C" */
+}

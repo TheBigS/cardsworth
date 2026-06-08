@@ -1,0 +1,218 @@
+openapi: 3.1.0
+info:
+  title: Cardsworth Render API
+  version: "1.0.0"
+  description: |
+    Headless rendering API for [Cardsworth](https://github.com/TheBigS/cardsworth).
+    Accepts a card definition (the same YAML/JSON the web app imports and exports)
+    and returns print-ready PNG images of the front and back faces.
+
+    This API is **optional** and only exists when you self-host the Cardsworth
+    server (`server.ts`, Express + Playwright). The web UI does not use it.
+  license:
+    name: Apache-2.0
+    url: https://github.com/TheBigS/cardsworth/blob/main/LICENSE
+servers:
+  - url: http://localhost:8080
+    description: Default self-hosted server (override with the PORT env var)
+paths:
+  /health:
+    get:
+      summary: Health check
+      operationId: getHealth
+      responses:
+        "200":
+          description: Server is up.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    const: ok
+  /api/render:
+    post:
+      summary: Render a card to PNG
+      operationId: renderCard
+      description: |
+        Renders the supplied card and returns the front and back faces as
+        750 × 1050 px PNG data URLs tagged at 300 DPI (2.5 × 3.5 in).
+
+        The request body is the Cardsworth card file — JSON **or** YAML (the
+        server sniffs the format, so the `Content-Type` header is not enforced).
+        When `card.autoReflow` is `true`, content that overflows the front face
+        is automatically moved to the back. When the card has `masks`, blackout
+        cut-guide overlays are returned in `overlay`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardFile"
+          application/yaml:
+            schema:
+              $ref: "#/components/schemas/CardFile"
+          text/plain:
+            schema:
+              type: string
+              description: A YAML document with the same shape as CardFile.
+      responses:
+        "200":
+          description: Render succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RenderResult"
+        "400":
+          description: Body was missing, unparseable, or failed validation.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Rendering failed.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    CardFile:
+      type: object
+      required: [version, card]
+      properties:
+        version:
+          type: integer
+          description: Card format version. Must be ≤ 1.
+          example: 1
+        card:
+          $ref: "#/components/schemas/Card"
+    Card:
+      type: object
+      description: |
+        All fields are optional; omitted fields fall back to the defaults below
+        (the same defaults the browser app applies on import).
+      properties:
+        title:
+          type: string
+          default: ""
+        imageEnabled:
+          type: boolean
+          default: true
+        imageDataUrl:
+          type: [string, "null"]
+          default: null
+          description: Card art as a base64 data URL (e.g. `data:image/png;base64,...`).
+        imageCropY:
+          type: number
+          default: 50
+          description: Vertical image crop offset, 0–100 (%).
+        imagePadding:
+          type: boolean
+          default: false
+        frontMarkdown:
+          type: string
+          default: ""
+        backMarkdown:
+          type: string
+          default: ""
+        borderColor:
+          type: string
+          default: "#540000"
+        titleFontSize:
+          type: number
+          default: 18
+        bodyFontSize:
+          type: number
+          default: 11
+        autoReflow:
+          type: boolean
+          default: false
+          description: Render-API only. Move overflowing front content to the back.
+        masks:
+          type: array
+          default: []
+          items:
+            $ref: "#/components/schemas/MaskZone"
+    MaskZone:
+      type: object
+      description: |
+        A blackout cut region in millimetres from the card's top-left.
+        Invalid zones (non-finite or non-positive size) are silently dropped.
+      required: [x, y, width, height]
+      properties:
+        id:
+          type: string
+          description: Defaults to the zone's index if omitted.
+        face:
+          type: string
+          enum: [front, back]
+          default: front
+        x:
+          type: number
+          description: Left offset (mm).
+        y:
+          type: number
+          description: Top offset (mm).
+        width:
+          type: number
+          description: Width (mm); must be > 0.
+        height:
+          type: number
+          description: Height (mm); must be > 0.
+        label:
+          type: string
+    RenderResult:
+      type: object
+      required: [front, back, reflow]
+      properties:
+        front:
+          type: string
+          description: Front face PNG as a data URL.
+          example: "data:image/png;base64,iVBORw0KGgo..."
+        back:
+          type: string
+          description: Back face PNG as a data URL.
+        reflow:
+          $ref: "#/components/schemas/ReflowInfo"
+        overlay:
+          type: object
+          description: Blackout overlays. Present only when the card has masks; a face key appears only when that face has zones.
+          properties:
+            front:
+              type: string
+              description: Front overlay PNG as a data URL.
+            back:
+              type: string
+              description: Back overlay PNG as a data URL.
+    ReflowInfo:
+      type: object
+      required: [needed]
+      properties:
+        needed:
+          type: boolean
+          description: Whether the front face overflowed its visible area.
+        overflowPx:
+          type: number
+          description: Hidden pixels on the front (for debugging).
+        splitAfterBlock:
+          type: integer
+          description: 0-indexed block after which content was split; -1 means even the first block does not fit.
+        suggestedFront:
+          type: string
+          description: Markdown that fits on the front.
+        suggestedBack:
+          type: string
+          description: Markdown that should move to the back.
+        backOverflow:
+          type: boolean
+          description: Set when the back still overflows after reflow (not auto-fixable).
+        backOverflowPx:
+          type: number
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string

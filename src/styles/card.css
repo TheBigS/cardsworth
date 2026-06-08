@@ -1,0 +1,125 @@
+/* Card visual styles */
+
+.card {
+  --border-color: #540000;
+  --title-font-size: 18px;
+  --body-font-size: 11px;
+
+  /* MTG card: 63.5mm × 88.9mm (2.5" × 3.5") */
+  width: 63.5mm;
+  height: 88.9mm;
+  padding: 9px;
+  border-radius: 3mm;
+  background: var(--border-color);
+  overflow: hidden;
+  font-family: 'EB Garamond', 'Georgia', serif;
+  box-sizing: border-box;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.card-inner {
+  background: #fff;
+  height: 100%;
+  border-radius: 1mm;
+  overflow: hidden;
+}
+
+.card-title {
+  font-size: var(--title-font-size);
+  font-family: 'Cinzel', 'Georgia', serif;
+  text-align: center;
+  padding: 6px 8px;
+  border-bottom: 3px solid var(--border-color);
+  font-weight: bold;
+}
+
+.card-image-container {
+  width: 100%;
+  height: 40%;
+  /* background-image, background-size, background-position set inline */
+  border-bottom: 3px solid var(--border-color);
+}
+
+.card-image-container.with-padding {
+  margin: 8px;
+  width: calc(100% - 16px);
+  height: calc(40% - 16px);
+}
+
+.card-body {
+  font-size: var(--body-font-size);
+  padding: 8px;
+  overflow: hidden;
+  line-height: 1.15;
+  text-align: left;
+}
+
+/* ---------------------------------------------------------------------------
+   Mask / blackout overlay face. Reuses .card sizing (63.5mm × 88.9mm) but
+   is transparent with no padding so the cut-guide SVG fills the full card box.
+   Additive — does not affect the .card front/back faces.
+   --------------------------------------------------------------------------- */
+.card-overlay {
+  position: relative;
+  padding: 0;
+  background: transparent;
+}
+
+/* The cut-guide is drawn with box-model divs (not SVG): the preview wrapper's
+   `zoom: 1.5` makes Firefox map an SVG viewBox inconsistently, drifting rects
+   off the card. mm borders + percentage positions use the layout engine and
+   stay correct under zoom in both engines. */
+
+/* Dashed card trim edge filling the full card box. */
+.card-overlay-edge {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border: 0.2mm dashed #999;
+  border-radius: 3mm;
+}
+
+/* Mask zone outline — positioned in % of the card (set inline). */
+.card-overlay-zone {
+  position: absolute;
+  box-sizing: border-box;
+  border: 0.3mm solid #000;
+}
+
+/* L-shaped corner registration ticks (two borders of a small mm square). */
+.card-overlay-tick {
+  position: absolute;
+  width: 4mm;
+  height: 4mm;
+  box-sizing: border-box;
+}
+.card-overlay-tick-tl {
+  top: 2mm;
+  left: 2mm;
+  border-top: 0.3mm solid #000;
+  border-left: 0.3mm solid #000;
+}
+.card-overlay-tick-tr {
+  top: 2mm;
+  right: 2mm;
+  border-top: 0.3mm solid #000;
+  border-right: 0.3mm solid #000;
+}
+.card-overlay-tick-bl {
+  bottom: 2mm;
+  left: 2mm;
+  border-bottom: 0.3mm solid #000;
+  border-left: 0.3mm solid #000;
+}
+.card-overlay-tick-br {
+  bottom: 2mm;
+  right: 2mm;
+  border-bottom: 0.3mm solid #000;
+  border-right: 0.3mm solid #000;
+}
+
+.card-body-full {
+  height: calc(100% - 16px);
+}

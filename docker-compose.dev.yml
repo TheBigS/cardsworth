@@ -1,0 +1,14 @@
+services:
+  app:
+    image: cardsworth-app-dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./src:/app/src
+      - ./index.html:/app/index.html
+      - ./public:/app/public
+    environment:
+      - NODE_ENV=development

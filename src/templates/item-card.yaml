@@ -1,0 +1,26 @@
+id: item-card
+name: Item Card
+front: |
+  **Rare Artifact** - *Cursed*
+
+  # Properties
+  - +3 to Intelligence
+  - *Glows faintly in darkness*
+  - **Requires attunement**
+
+  ## Special Ability
+  Once per day, cast *Detect Magic* without expending a spell slot.
+back: |
+  # Lore
+  This ancient tome was discovered in the **Ruins of Valdris** by the wizard *Elara Nightwhisper*.
+
+  ## History
+  - Crafted by the **Archmage Zorin**
+  - Lost for *500 years*
+  - Contains forbidden knowledge
+
+  ### Warning
+  *Prolonged use may cause:*
+  - Vivid nightmares
+  - **Temporary madness**
+  - Whispers from beyond

@@ -1,0 +1,994 @@
+/* Editor panel styles */
+
+.app {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Editor shell: fixed-width column that never scrolls below the fold. The tab
+   body (.ed-page) flexes and the footer (.ed-foot) pins to the bottom. */
+.editor-panel {
+  flex: 0 0 364px;
+  width: 364px;
+  padding: 22px;
+  background: #f5f5f5;
+  border-right: 1px solid #ddd;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ed-page {
+  margin-top: 18px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.ed-foot {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #e2e2e2;
+}
+
+/* Preview pane: a column of [topbar][scroll]. The scroll child is the real
+   horizontal scroller; min-width:0 lets this flex item shrink below the cards'
+   combined width so the scrollbar actually appears in a narrow window. */
+.preview-panel {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--neutral-stage, #e0e0e0);
+}
+
+/* The "How it works" link gets its own top row, right-aligned, so it no longer
+   sits on top of the "Back" label. */
+.preview-topbar {
+  flex: none;
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 20px 0;
+}
+
+/* The scroll container — scrolls when the cards overflow a narrow window. */
+.preview-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  padding: 12px 40px 28px;
+}
+
+/* Center with auto margins so overflow stays reachable from the start; centering
+   with align/justify-content would push the left edge into unreachable overflow. */
+.preview-inner {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* "How it works" utility link (now in .preview-topbar, normal flow). */
+.howto-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #d4cdbf;
+  color: var(--brand, #540000);
+  font-family: var(--font-ui, 'Alegreya Sans', sans-serif);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: background 0.14s, border-color 0.14s, transform 0.14s;
+}
+
+.howto-link:hover {
+  background: #fff;
+  border-color: var(--brand, #540000);
+  transform: translateY(-1px);
+}
+
+.howto-icon {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+/* Segmented tab control */
+.seg {
+  display: flex;
+  gap: 4px;
+  background: #e7e7e7;
+  padding: 4px;
+  border-radius: 9px;
+}
+
+.seg-btn {
+  flex: 1;
+  padding: 8px 4px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 13.5px;
+  color: #777;
+  cursor: pointer;
+  transition: 0.12s;
+}
+
+.seg-btn:hover {
+  color: #444;
+}
+
+.seg-btn.active {
+  background: #540000;
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.form-group textarea {
+  min-height: 200px;
+  resize: vertical;
+}
+
+.form-group input[type="range"] {
+  width: 100%;
+  accent-color: #540000;
+}
+
+/* Image size hint under the drop zone */
+.field-hint {
+  font-size: 12px;
+  color: #9a8c74;
+  margin: -4px 0 16px;
+  line-height: 1.4;
+}
+
+.field-hint strong {
+  color: #6b5d49;
+  font-weight: 700;
+}
+
+.color-presets {
+  display: flex;
+  gap: 7px;
+  margin-top: 8px;
+  padding: 3px 0 3px 6px;
+  flex-wrap: wrap;
+}
+
+.color-preset {
+  width: 26px;
+  height: 26px;
+  border: 2px solid #333;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.color-preset:hover {
+  transform: scale(1.1);
+}
+
+/* Download Buttons */
+.download-button {
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: #540000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.download-button:hover {
+  background: #3D0000;
+}
+
+/* Image Upload */
+.image-upload {
+  margin-bottom: 16px;
+}
+
+.drop-zone {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 18px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+  min-height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+}
+
+.drop-zone:hover,
+.drop-zone.dragging {
+  border-color: #540000;
+  background-color: #faf5f0;
+}
+
+.drop-zone.has-image {
+  padding: 8px;
+}
+
+.upload-preview {
+  max-width: 100%;
+  max-height: 130px;
+  object-fit: contain;
+}
+
+.clear-image-btn {
+  margin-top: 8px;
+  padding: 6px 12px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.clear-image-btn:hover {
+  background: #c82333;
+}
+
+/* Color Picker */
+.color-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.color-input {
+  width: 46px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.color-value {
+  font-family: monospace;
+  font-size: 13px;
+  color: #666;
+}
+
+.color-preset.active {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* Neutral grey "+" save button — intentionally doesn't compete with the
+   burgundy accent. */
+.save-color-btn {
+  width: 26px;
+  height: 26px;
+  background: #e7e4df;
+  color: #6b6b6b;
+  border: 1px solid #cfcbc4;
+  border-radius: 4px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.save-color-btn:hover {
+  background: #dcd8d2;
+  color: #444;
+}
+
+/* Custom panel — always visible, grouped with the swatches it feeds. */
+.custom-panel {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #e4e1db;
+}
+
+.custom-colors-label {
+  font-size: 12px;
+  color: #9a9a9a;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.custom-panel .color-presets {
+  padding-left: 6px;
+}
+
+/* Font Size Control */
+.font-size-value {
+  font-weight: normal;
+  color: #666;
+}
+
+/* Markdown hint text (used by the Mask tab help copy) */
+.markdown-hint {
+  font-size: 11px;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* Checkbox Group */
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: auto;
+}
+
+/* Preview Labels */
+.preview-card-wrapper {
+  text-align: center;
+  zoom: 1.5;
+}
+
+.preview-label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #666;
+}
+
+/* Section Divider */
+.section-divider {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+.editor-panel h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+/* Preview cards container */
+.preview-cards {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
+  flex: none; /* keep natural width; don't collapse — the inner row scrolls */
+}
+
+/* Print tip */
+.print-tip {
+  margin-top: 24px;
+  padding: 12px 16px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+  max-width: 500px;
+}
+
+/* Overflow warning */
+.overflow-warning {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6px;
+  width: 18px;
+  height: 18px;
+  background: #dc3545;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: help;
+}
+
+/* Number input */
+.form-group input[type="number"] {
+  width: 80px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+/* Template selector */
+.template-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+}
+
+/* Import/Export */
+.import-export-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* Square icon buttons — labels live in the title/aria-label tooltip so the row
+   never wraps in the fixed-width panel. */
+.export-btn,
+.import-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 38px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.export-btn {
+  background: #540000;
+  color: white;
+}
+
+.export-btn:hover {
+  background: #3D0000;
+}
+
+.export-btn-secondary {
+  background: #666;
+}
+
+.export-btn-secondary:hover {
+  background: #555;
+}
+
+.import-btn {
+  background: #1A2F4A;
+  color: white;
+}
+
+.import-btn:hover {
+  background: #0f1d2e;
+}
+
+/* ===========================================================================
+   Mask / blackout overlay UI
+   =========================================================================== */
+
+/* Intro/help copy at the top of a tab. */
+.tab-intro {
+  margin: 0 0 16px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #8a8a8a;
+}
+
+/* Toggle switch (mask mode) — replaces the bare checkbox. */
+.toggle-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.toggle-switch {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-flex;
+  cursor: pointer;
+}
+
+/* Visually hidden but still focusable/operable native checkbox. */
+.toggle-switch input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.toggle-track {
+  display: inline-block;
+  width: 42px;
+  height: 24px;
+  background: #ccc;
+  border-radius: 999px;
+  transition: background 0.15s ease;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease;
+}
+
+.toggle-switch input:checked + .toggle-track {
+  background: #540000;
+}
+
+.toggle-switch input:checked + .toggle-track .toggle-thumb {
+  transform: translateX(18px);
+}
+
+.toggle-switch input:focus-visible + .toggle-track {
+  outline: 2px solid #540000;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle-track,
+  .toggle-thumb {
+    transition: none;
+  }
+}
+
+.toggle-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.toggle-title {
+  font-weight: 700;
+  color: #444;
+  font-size: 14.5px;
+}
+
+.toggle-desc {
+  font-size: 12px;
+  color: #9a9a9a;
+}
+
+.mask-list-heading {
+  margin: 4px 0 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  color: #9a9a9a;
+}
+
+/* Positioning context over each preview card for mask zones + draw surface.
+   Block + fit-content + auto margins keep the card centered with its download
+   button below it (matching the original layout); no line-height override so
+   the card title keeps its normal line height. */
+.card-stage {
+  position: relative;
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* Transparent capture layer for drag-to-draw. Sits above the card; mask zones
+   float above it (see z-index) so their delete buttons stay clickable. */
+.mask-draw-surface {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+/* A committed mask zone outline shown while editing (grey — the printed
+   overlay uses black outlines). */
+.mask-zone {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none; /* let drags pass through to the surface */
+  border: 1.5px solid #2d2d2d;
+  background: rgba(45, 45, 45, 0.18);
+  box-sizing: border-box;
+}
+
+.mask-zone-label {
+  position: absolute;
+  top: -2px;
+  left: 2px;
+  font-size: 9px;
+  line-height: 1.4;
+  color: #fff;
+  background: #2d2d2d;
+  padding: 0 3px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.mask-zone-del {
+  position: absolute;
+  top: -9px;
+  right: -9px;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  pointer-events: auto; /* clickable even though the parent zone isn't */
+  border: none;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+.mask-zone-del:hover {
+  background: #333;
+}
+
+/* The live rectangle being dragged out. */
+.mask-draft {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  border: 1.5px dashed #2d2d2d;
+  background: rgba(45, 45, 45, 0.12);
+  box-sizing: border-box;
+}
+
+/* Overlay (cut-guide) preview block below the main card row. */
+.preview-overlay-section {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px dashed #bbb;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preview-overlay-title {
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 13px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Show the otherwise-transparent overlay on a checkerboard so the cut lines
+   are visible in the editor. The checker lives on this WRAPPER, not on the
+   .card-overlay element itself, so the screenshot/export stays transparent. */
+.overlay-checker {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  font-size: 0; /* drop the inline gap below the card without affecting children */
+  border: 1px solid #ccc;
+  background-color: #fff;
+  background-image:
+    linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%),
+    linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%);
+  background-size: 12px 12px;
+  background-position: 0 0, 6px 6px;
+}
+
+/* Zone list in the editor panel. */
+.mask-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.mask-list-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mask-face-badge {
+  flex: 0 0 auto;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #fff;
+}
+.mask-face-front {
+  background: #540000;
+}
+.mask-face-back {
+  background: #1a2f4a;
+}
+
+.mask-label-input {
+  flex: 1;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.mask-remove-btn {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 4px;
+  background: #dc3545;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+.mask-remove-btn:hover {
+  background: #c82333;
+}
+
+/* ===========================================================================
+   Text tab — trigger buttons that open the focused Markdown modal
+   =========================================================================== */
+.text-field {
+  display: flex;
+  gap: 10px;
+}
+
+.text-field.stacked {
+  flex-direction: column;
+}
+
+.text-open-btn {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  padding: 13px 14px;
+  background: #fff;
+  border: 1px solid #d8d8d8;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: 0.12s;
+}
+
+.text-open-btn:hover {
+  border-color: #540000;
+  box-shadow: 0 2px 8px rgba(84, 0, 0, 0.08);
+}
+
+.tob-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tob-label {
+  font-weight: 700;
+  color: #444;
+  font-size: 14.5px;
+  white-space: nowrap;
+}
+
+.tob-edit {
+  color: #540000;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.tob-snippet {
+  font-size: 12px;
+  color: #9a9a9a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-style: italic;
+}
+
+/* ===========================================================================
+   Focused Markdown editor (pop-open modal)
+   =========================================================================== */
+.md-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 8, 8, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 32px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .md-overlay {
+    animation: md-fade 0.14s ease;
+  }
+}
+
+@keyframes md-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.md-modal {
+  width: min(1000px, 96vw);
+  height: min(700px, 92vh);
+  background: #f5f5f5;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 36px 90px rgba(0, 0, 0, 0.45);
+}
+
+.md-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  background: #fff;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.md-tabs {
+  display: flex;
+  gap: 4px;
+  background: #ececec;
+  padding: 3px;
+  border-radius: 8px;
+}
+
+.md-tab {
+  padding: 7px 18px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-weight: 700;
+  color: #7a7a7a;
+  cursor: pointer;
+}
+
+.md-tab.active {
+  background: #540000;
+  color: #fff;
+}
+
+.md-head-title {
+  color: #999;
+  font-size: 13px;
+}
+
+.md-done {
+  margin-left: auto;
+  padding: 9px 24px;
+  background: #540000;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.md-done:hover {
+  filter: brightness(0.88);
+}
+
+.md-body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.md-editor-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  gap: 10px;
+  min-width: 0;
+}
+
+.md-textarea {
+  flex: 1;
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 9px;
+  padding: 15px;
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #2a2a2a;
+}
+
+.md-textarea:focus {
+  outline: 2px solid #540000;
+  outline-offset: -1px;
+  border-color: transparent;
+}
+
+.md-hintbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #999;
+  flex-wrap: wrap;
+}
+
+.md-hintbar code {
+  background: #ececec;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #666;
+}
+
+/* Width 408px deliberately fits the 1.5× card (360px wide) without clipping —
+   do not shrink below ~404px. */
+.md-preview-col {
+  flex: 0 0 408px;
+  width: 408px;
+  background: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 22px;
+  gap: 14px;
+  border-left: 1px solid #d5d5d5;
+}
+
+.md-preview-label {
+  font-size: 12px;
+  color: #777;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.md-card-hold {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}

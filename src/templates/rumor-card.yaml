@@ -1,0 +1,29 @@
+id: rumor-card
+name: Rumor Card
+front: |
+  # Rumor Title
+
+  **Source:** Tavern gossip
+  **Reliability:** Uncertain
+
+  ## The Rumor
+  *"They say the old mill is haunted by the ghost of the miller's daughter..."*
+
+  ## Hook
+  Why this might interest the party.
+back: |
+  # Truth Behind the Rumor
+
+  ## Reality
+  What's actually going on.
+
+  ## Investigation
+  - **DC 15 Investigation:** Partial truth
+  - **DC 20 Investigation:** Full story
+
+  ## Leads
+  - Person to talk to
+  - Place to investigate
+
+  ## Connected Plots
+  Related storylines or quests.

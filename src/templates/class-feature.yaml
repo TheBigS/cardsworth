@@ -1,0 +1,26 @@
+id: class-feature
+name: Class Feature
+front: |
+  # Feature Name
+
+  **Class:** Fighter
+  **Level:** 3
+
+  ## Description
+  Description of the class feature goes here.
+
+  ## Usage
+  - *Action Type:* Bonus Action
+  - *Uses:* Proficiency bonus per long rest
+back: |
+  # Details
+
+  ## Mechanics
+  Detailed mechanical explanation.
+
+  ## Tips
+  - Tactical advice
+  - Synergies with other abilities
+
+  ## Notes
+  Additional notes or clarifications.

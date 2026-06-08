@@ -1,0 +1,27 @@
+id: creature-card
+name: Creature Card
+front: |
+  # Creature Name
+
+  **Type:** Beast
+  **CR:** 2
+
+  ## Stats
+  - **AC:** 14
+  - **HP:** 45
+  - **Speed:** 40 ft.
+
+  ## Attacks
+  **Bite.** +5 to hit, 2d6+3 piercing
+back: |
+  # Abilities
+
+  ## Special Traits
+  - **Keen Senses:** Advantage on Perception
+  - **Pack Tactics:** Advantage when ally nearby
+
+  ## Actions
+  Standard attack options.
+
+  ## Behavior
+  How this creature typically acts in combat.

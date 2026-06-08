@@ -1,0 +1,596 @@
+/* ============================================================================
+   "How it works" tutorial page. Ported from the design reference.
+   All rules are scoped under `.hiw` so the page's tokens and class names
+   (.brand-mark, .step, .tip, .eyebrow, …) never collide with the editor's.
+   ============================================================================ */
+
+.hiw {
+  --brand: #540000;
+  --brand-hover: #3d0000;
+  --brass: #8b6914;
+  --brass-light: #b9923a;
+  --parchment-50: #faf6ea;
+  --parchment-100: #f4ecd8;
+  --parchment-200: #ece0c4;
+  --parchment-300: #e0d0ac;
+  --paper: #fff;
+  --ink-900: #2b2118;
+  --ink-700: #4a3d2e;
+  --ink-500: #6b5d49;
+  --ink-300: #9a8c74;
+  --line: #ddd2bb;
+  --shadow-md: 0 6px 22px rgba(43, 33, 24, 0.12);
+  --shadow-card: 0 14px 34px rgba(43, 33, 24, 0.22);
+  --font-display: 'Cinzel', 'Georgia', serif;
+  --font-body: 'EB Garamond', 'Georgia', serif;
+  --font-ui: 'Alegreya Sans', sans-serif;
+
+  min-height: 100vh;
+  font-family: var(--font-ui);
+  color: var(--ink-900);
+  line-height: 1.55;
+  background: var(--parchment-100);
+  background-image: radial-gradient(circle at 12% 8%, #faf6ea 0%, transparent 42%),
+    radial-gradient(circle at 88% 92%, #f7efdc 0%, transparent 46%);
+}
+
+.hiw a {
+  color: inherit;
+}
+
+/* ---- top bar ---- */
+.hiw .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 32px;
+  background: rgba(244, 236, 216, 0.86);
+  backdrop-filter: saturate(1.2) blur(2px);
+  border-bottom: 1px solid var(--line);
+}
+.hiw .brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--brand);
+  text-decoration: none;
+}
+.hiw .brand-mark {
+  width: 50px;
+  height: auto;
+  flex: none;
+  display: block;
+}
+.hiw .brand-name {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  color: var(--brand);
+}
+.hiw .brand-sub {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-300);
+  margin-top: 4px;
+  padding-left: 2px;
+}
+.hiw .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 15px;
+  border-radius: 7px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--brand);
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: none;
+  transition: border-color 0.14s, transform 0.14s;
+  white-space: nowrap;
+}
+.hiw .back-link:hover {
+  border-color: var(--brand);
+  transform: translateY(-1px);
+}
+.hiw .back-link svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ---- hero ---- */
+.hiw .hero {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 34px 32px 4px;
+  text-align: center;
+}
+.hiw .eyebrow {
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin: 0 0 14px;
+}
+.hiw .hero h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 46px;
+  line-height: 1.08;
+  letter-spacing: 0.02em;
+  color: var(--brand);
+  margin: 0;
+}
+
+/* ---- final-result hero image ---- */
+.hiw .result {
+  max-width: 620px;
+  margin: 20px auto 4px;
+  padding: 0 32px;
+}
+.hiw .result figure {
+  margin: 0;
+  position: relative;
+}
+.hiw .result .photo {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  display: block;
+  border: 6px solid var(--paper);
+  border-radius: 15px;
+  box-shadow: var(--shadow-card);
+}
+.hiw .result figcaption {
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  color: var(--ink-500);
+  margin-top: 13px;
+}
+.hiw .result figcaption b {
+  color: var(--ink-900);
+  font-weight: 700;
+}
+
+/* ---- supplies ---- */
+.hiw .supplies {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 32px 6px;
+}
+.hiw .supplies-head {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.hiw .supplies-head .eyebrow {
+  margin-bottom: 10px;
+}
+.hiw .supplies-head h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 0.02em;
+  color: var(--brand);
+  margin: 0;
+}
+.hiw .supply-list {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  box-shadow: var(--shadow-md);
+}
+.hiw .supply {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--line);
+}
+.hiw .supply:first-child {
+  border-top: none;
+}
+.hiw .supply-thumb {
+  position: relative;
+  flex: none;
+  width: 62px;
+  height: 62px;
+}
+.hiw .supply-thumb .photo {
+  width: 62px;
+  height: 62px;
+  object-fit: cover;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+.hiw .thumb-zoom {
+  position: absolute;
+  right: -7px;
+  bottom: -7px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(43, 33, 24, 0.18);
+  transition: transform 0.12s, border-color 0.12s;
+  padding: 0;
+}
+.hiw .thumb-zoom:hover {
+  transform: scale(1.12);
+  border-color: var(--brand);
+}
+.hiw .thumb-zoom svg {
+  width: 13px;
+  height: 13px;
+}
+.hiw .supply-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.hiw .supply-text h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  color: var(--ink-900);
+  margin: 0 0 2px;
+}
+.hiw .supply-text p {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink-500);
+  margin: 0;
+}
+.hiw .supply-text p .spec {
+  color: var(--brass);
+  font-weight: 700;
+}
+.hiw .supply-link {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  border-radius: 7px;
+  border: 1px solid var(--line);
+  color: var(--brand);
+  background: var(--parchment-100);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 12.5px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.14s, background 0.14s, transform 0.14s;
+}
+.hiw .supply-link:hover {
+  border-color: var(--brand);
+  background: #fff;
+  transform: translateY(-1px);
+}
+.hiw .supply-link svg {
+  width: 13px;
+  height: 13px;
+  flex: none;
+}
+
+/* ---- supply lightbox ---- */
+.hiw .lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  background: rgba(30, 12, 12, 0.6);
+}
+.hiw .lightbox-card {
+  background: var(--parchment-100);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  width: min(640px, 94vw);
+  padding: 20px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.hiw .lightbox-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.hiw .lightbox-head h3 {
+  font-family: var(--font-display);
+  font-size: 21px;
+  color: var(--brand);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+.hiw .lightbox-close {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink-700);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.12s, color 0.12s;
+}
+.hiw .lightbox-close:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+.hiw .lightbox-slot {
+  width: 100%;
+  height: 420px;
+  object-fit: contain;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--parchment-200);
+}
+
+/* ---- steps ---- */
+.hiw .steps {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px 32px 20px;
+}
+.hiw .step {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 44px;
+  align-items: center;
+  padding: 38px 0;
+  border-top: 1px solid var(--line);
+}
+.hiw .step:nth-child(even) .step-media {
+  order: 2;
+}
+.hiw .step-media {
+  position: relative;
+}
+.hiw .step-media .photo {
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+  display: block;
+  box-shadow: var(--shadow-card);
+  border: 5px solid var(--paper);
+  border-radius: 10px;
+}
+.hiw .photo-tag {
+  position: absolute;
+  left: -10px;
+  top: -14px;
+  z-index: 2;
+  background: var(--brand);
+  color: #f4ecd8;
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  padding: 6px 13px;
+  border-radius: 5px;
+  box-shadow: var(--shadow-md);
+  transform: rotate(-2deg);
+}
+.hiw .step-no {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #f7efda;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.hiw .step-body h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 27px;
+  letter-spacing: 0.02em;
+  color: var(--ink-900);
+  margin: 0 0 12px;
+}
+.hiw .step-body p {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink-700);
+  margin: 0 0 12px;
+}
+.hiw .step-body .tip {
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  color: var(--ink-500);
+  background: var(--parchment-200);
+  border-left: 3px solid var(--brass);
+  border-radius: 0 6px 6px 0;
+  padding: 10px 14px;
+  margin-top: 14px;
+}
+.hiw .step-body .tip b {
+  color: var(--ink-900);
+}
+.hiw .step-body strong {
+  color: var(--ink-900);
+}
+/* optional step variant */
+.hiw .step-no.is-optional {
+  width: auto;
+  height: auto;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--brass);
+  border: 1.5px solid var(--brass);
+  box-shadow: none;
+  padding: 6px 14px 5px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.hiw .step--optional .step-media .photo {
+  border: 5px dashed var(--brass);
+}
+
+/* ---- self-host callout ---- */
+.hiw .callout-wrap {
+  max-width: 1000px;
+  margin: 30px auto 70px;
+  padding: 0 32px;
+}
+.hiw .callout {
+  position: relative;
+  overflow: hidden;
+  background: var(--brand);
+  color: #f4ecd8;
+  border-radius: 16px;
+  padding: 46px 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 34px;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-card);
+}
+.hiw .callout::after {
+  content: '';
+  position: absolute;
+  right: -40px;
+  bottom: -60px;
+  width: 260px;
+  height: 260px;
+  opacity: 0.1;
+  background: radial-gradient(circle, #fff 0%, transparent 70%);
+  pointer-events: none;
+}
+.hiw .callout-mark {
+  position: absolute;
+  right: 34px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-6deg);
+  width: 150px;
+  height: auto;
+  /* Faint cream watermark on the burgundy callout. The mark themes via --cw-*
+     (set by .brand-mark--watermark on the element); opacity makes it subtle. */
+  opacity: 0.13;
+  pointer-events: none;
+}
+.hiw .callout-text {
+  position: relative;
+  max-width: 560px;
+}
+.hiw .callout-text .eyebrow {
+  color: var(--brass-light);
+}
+.hiw .callout-text h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: 0.02em;
+  margin: 0 0 10px;
+  color: #fdf6e6;
+}
+.hiw .callout-text p {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.45;
+  color: #e7d4c4;
+  margin: 0;
+}
+.hiw .source-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  background: #f4ecd8;
+  color: var(--brand);
+  font-family: var(--font-ui);
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  padding: 15px 26px;
+  border-radius: 9px;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 0 #c9a24a;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.hiw .source-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #c9a24a;
+}
+.hiw .source-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.hiw footer {
+  text-align: center;
+  padding: 0 32px 50px;
+  color: var(--ink-300);
+  font-size: 12.5px;
+}
+.hiw footer a {
+  color: var(--ink-500);
+  text-decoration: none;
+  font-weight: 700;
+}
+.hiw footer a:hover {
+  color: var(--brand);
+}
+
+@media (max-width: 760px) {
+  .hiw .step {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .hiw .step:nth-child(even) .step-media {
+    order: 0;
+  }
+  .hiw .hero h1 {
+    font-size: 34px;
+  }
+  .hiw .callout {
+    padding: 34px;
+  }
+  .hiw .callout-mark {
+    display: none;
+  }
+  .hiw .supply {
+    flex-wrap: wrap;
+  }
+  .hiw .supply-link {
+    margin-left: 40px;
+  }
+}

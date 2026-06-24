@@ -44,7 +44,7 @@ export function CardsworthMark({
 }
 
 /**
- * Header lockup: mark + "Cardsworth" wordmark + "RPG CARD CREATOR" subtitle,
+ * Header lockup: mark + "Cardsworth" wordmark + "PRINTABLE RPG CARDS" subtitle,
  * with a GitHub Source link in the header's right gutter (space-between row).
  * Requires the .brand-* / .source-link rules from brand.css.
  */
@@ -55,7 +55,7 @@ export function BrandHeader() {
         <CardsworthMark className="brand-mark" />
         <div className="brand-text">
           <div className="brand-name">Cardsworth</div>
-          <div className="brand-sub">RPG Card Creator</div>
+          <div className="brand-sub">Printable RPG Cards</div>
         </div>
       </div>
       <SourceLink repoUrl={REPO_URL} />

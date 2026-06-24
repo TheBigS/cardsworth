@@ -122,6 +122,10 @@ completely understand if you feel differently and choose not to use it. I built
 this for my own group of players, and I'm sharing it for free in case it helps 
 someone else out.
 
+## Prior art
+
+Cardsworth was inspired by the card creator at rpgportrait.app. It's an independent, open-source reimplementation — not affiliated with or endorsed by them — built to add features I needed (API access, custom border colors, and offline durability).
+
 ## License
 
 [Apache License 2.0](LICENSE)

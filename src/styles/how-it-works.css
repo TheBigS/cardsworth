@@ -145,7 +145,8 @@
 }
 .hiw .result .photo {
   width: 100%;
-  height: 340px;
+  aspect-ratio: 1037 / 430;
+  height: auto;
   object-fit: cover;
   display: block;
   border: 6px solid var(--paper);
@@ -173,6 +174,13 @@
 .hiw .supplies-head {
   text-align: center;
   margin-bottom: 24px;
+}
+.hiw .supplies-disclaimer {
+  margin: 14px 4px 0;
+  text-align: center;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-300);
 }
 .hiw .supplies-head .eyebrow {
   margin-bottom: 10px;
@@ -382,6 +390,37 @@
   box-shadow: var(--shadow-card);
   border: 5px solid var(--paper);
   border-radius: 10px;
+}
+.hiw .editor-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  height: 330px;
+  box-sizing: border-box;
+  padding: 24px;
+  background: var(--brand);
+  color: #f4ecd8;
+  font-family: var(--font-ui);
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  border: 5px solid var(--paper);
+  border-radius: 10px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.hiw .editor-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+}
+.hiw .editor-cta svg {
+  width: 46px;
+  height: 46px;
+  color: var(--brass);
 }
 .hiw .photo-tag {
   position: absolute;

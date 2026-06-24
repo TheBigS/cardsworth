@@ -9,14 +9,31 @@ import '../styles/how-it-works.css'
 // BASE_URL keeps it resolvable under a subpath (GitHub Pages) as well as at root.
 const PLACEHOLDER = `${import.meta.env.BASE_URL}supply-placeholder.svg`
 
-// TODO: product reference URLs — owner to supply. Until then these point at '#'.
-const TODO_PRODUCT_LINK = '#'
+// White-balanced build photos (src/assets/images/balanced). Filenames keep their
+// original capture timestamps; the aliases below name what each frame shows.
+import imgSleevesSingle from '../assets/images/balanced/WIN_20260622_15_22_05_Pro.jpg'
+import imgSleevesClear from '../assets/images/balanced/WIN_20260622_15_22_20_Pro.jpg'
+import imgCornerPunch from '../assets/images/balanced/WIN_20260622_15_22_51_Pro.jpg'
+import imgCutter from '../assets/images/balanced/WIN_20260622_15_23_49_Pro.jpg'
+import imgStepPrint from '../assets/images/balanced/WIN_20260622_15_24_07_Pro.jpg'
+import imgStepCut from '../assets/images/balanced/WIN_20260622_15_26_03_Pro.jpg'
+import imgStepGlue from '../assets/images/balanced/WIN_20260622_15_26_56_Pro.jpg'
+import imgBlackTape from '../assets/images/balanced/WIN_20260622_15_30_04_Pro.jpg'
+import imgStepSleeve from '../assets/images/balanced/WIN_20260622_15_30_25_Pro.jpg'
+import imgStepMask from '../assets/images/balanced/WIN_20260622_15_30_29_Pro.jpg'
+import imgStepReady from '../assets/images/balanced/WIN_20260622_15_31_08_Pro.jpg'
+import imgResultFront from '../assets/images/cardsworthcard2.png'
+import imgGlueStick from '../assets/images/gluestick.jpg'
+import imgMagicBulk from '../assets/images/magicbulk.jpg'
+import imgPerfectFit from '../assets/images/perfectfit.jpg'
+// Spares not yet placed: 15_28_51 (clean glued front), 15_30_43 (sleeved, angled).
 
 interface Supply {
   id: string
   title: string
   note: ReactNode
-  link?: string // button label; href is the (TODO) product URL
+  link?: { label: string; href: string } // product link button (affiliate where noted)
+  image?: string // build photo; falls back to PLACEHOLDER when absent
 }
 
 const SUPPLIES: Supply[] = [
@@ -29,6 +46,7 @@ const SUPPLIES: Supply[] = [
         table light.
       </>
     ),
+    link: { label: 'The paper I use', href: 'https://amzn.to/3QSF1Tj' },
   },
   {
     id: 'supply-cutter',
@@ -39,7 +57,8 @@ const SUPPLIES: Supply[] = [
         Cutouts don't need to be perfect; the borders are forgiving.
       </>
     ),
-    link: 'The cutter I use',
+    link: { label: 'The scissors I use', href: 'https://amzn.to/4vvBsBy' },
+    image: imgCutter,
   },
   {
     id: 'supply-punch',
@@ -49,7 +68,8 @@ const SUPPLIES: Supply[] = [
         Optional. A <span className="spec">3 mm</span> radius rounds corners to match real cards.
       </>
     ),
-    link: 'The punch I use',
+    link: { label: 'The punch I use', href: 'https://amzn.to/4xJw9js' },
+    image: imgCornerPunch,
   },
   {
     id: 'supply-adhesive',
@@ -60,18 +80,25 @@ const SUPPLIES: Supply[] = [
         flatter, bubble-free bond.
       </>
     ),
+    link: { label: 'The glue I use', href: 'https://amzn.to/4aYs4hp' },
+    image: imgGlueStick,
   },
   {
     id: 'supply-cores',
     title: 'Sacrificial MTG cards',
     note: <>Basic lands or spare game cards for weight and an opaque core.</>,
-    link: 'Bulk cards I use',
+    link: {
+      label: 'Bulk cards I use',
+      href: 'https://www.tcgplayer.com/search/bulk-lots/magic-the-gathering-bulk-card-lots?productLineName=bulk-lots&setName=magic-the-gathering-bulk-card-lots&view=grid',
+    },
+    image: imgMagicBulk,
   },
   {
     id: 'supply-sleeves-single',
     title: 'Single-sided sleeves',
     note: <>Any color. One clear face, one solid back — shows the front and hides the core.</>,
-    link: 'The sleeves I use',
+    link: { label: 'The sleeves I use', href: 'https://amzn.to/4xKv6Q6' },
+    image: imgSleevesSingle,
   },
   {
     id: 'supply-sleeves-clear',
@@ -81,7 +108,8 @@ const SUPPLIES: Supply[] = [
         Fully transparent <span className="spec">66 × 91 mm</span> sleeves for the outer layer.
       </>
     ),
-    link: 'The clear sleeves I use',
+    link: { label: 'The clear sleeves I use', href: 'https://amzn.to/3Sq48x9' },
+    image: imgSleevesClear,
   },
   {
     id: 'supply-sleeves-fit',
@@ -92,7 +120,8 @@ const SUPPLIES: Supply[] = [
         against the card.
       </>
     ),
-    link: 'The fit sleeves I use',
+    link: { label: 'The fit sleeves I use', href: 'https://amzn.to/4oDOkTq' },
+    image: imgPerfectFit,
   },
   {
     id: 'supply-tape',
@@ -103,17 +132,8 @@ const SUPPLIES: Supply[] = [
         layer, then peels clean.
       </>
     ),
-    link: 'The tape I use',
-  },
-  {
-    id: 'supply-cardstock',
-    title: 'White cardstock',
-    note: (
-      <>
-        Optional. Only for printing reusable <span className="spec">mask</span> cutout templates
-        you trace and re-use.
-      </>
-    ),
+    link: { label: 'The tape I use', href: 'https://amzn.to/43R9KD7' },
+    image: imgBlackTape,
   },
 ]
 
@@ -125,14 +145,37 @@ interface Step {
   body: ReactNode
   tip: ReactNode
   alt: string
+  image?: string // build photo; falls back to PLACEHOLDER when absent
+  editorCta?: boolean // render an "open the editor" button in place of a photo
 }
 
 const STEPS: Step[] = [
+  {
+    id: 'howto-step-0',
+    badge: '0',
+    title: 'Build your card',
+    alt: 'Open the Cardsworth editor',
+    editorCta: true,
+    body: (
+      <>
+        Start in the <strong>Cardsworth editor</strong>. Pick a card type, fill in the title, art,
+        stats, and lore, and watch the card render live. When you're happy with it, you're ready to
+        print.
+      </>
+    ),
+    tip: (
+      <>
+        Save your work as <b>YAML</b> with the download button — re-import it anytime to reprint or
+        revise the card later.
+      </>
+    ),
+  },
   {
     id: 'howto-step-1',
     badge: '1',
     title: 'Export & print',
     alt: 'Printed sheet fresh off the printer',
+    image: imgStepPrint,
     body: (
       <>
         Hit <strong>Download Front</strong> and <strong>Download Back</strong> to save both faces as
@@ -152,6 +195,7 @@ const STEPS: Step[] = [
     badge: '2',
     title: 'Cut to size',
     alt: 'Trimming a card with a guillotine or craft knife',
+    image: imgStepCut,
     body: (
       <>
         Trim each face along its border with a guillotine cutter, a steel ruler and craft knife, or
@@ -171,6 +215,7 @@ const STEPS: Step[] = [
     badge: '3',
     title: 'Glue to a core',
     alt: 'Gluing front and back onto a core card',
+    image: imgStepGlue,
     body: (
       <>
         Spray-mount or glue-stick the front and back (if needed) onto a{' '}
@@ -190,6 +235,7 @@ const STEPS: Step[] = [
     optional: true,
     title: 'Mask an unidentified item',
     alt: 'Applying the mask with black tape',
+    image: imgStepMask,
     body: (
       <>
         Only if the item is <strong>unidentified</strong>: turn on <strong>Mask</strong> mode in
@@ -209,6 +255,7 @@ const STEPS: Step[] = [
     badge: '4',
     title: 'Sleeve it',
     alt: 'Sliding the card into a sleeve',
+    image: imgStepSleeve,
     body: (
       <>
         Match the sleeve to the card. <strong>Front-only cards</strong> go in single-sided sleeves
@@ -229,6 +276,7 @@ const STEPS: Step[] = [
     badge: '5',
     title: 'Ready for play',
     alt: 'The finished card in hand, fanned in a deck',
+    image: imgStepReady,
     body: (
       <>
         That's a finished, table-ready Cardsworth card. Hand it to a player and watch the lore land
@@ -318,7 +366,7 @@ export function HowItWorks({ onNavigate }: HowItWorksProps) {
           <CardsworthMark className="brand-mark" />
           <span>
             <span className="brand-name">Cardsworth</span>
-            <span className="brand-sub">RPG Card Creator</span>
+            <span className="brand-sub">Printable RPG Cards</span>
           </span>
         </a>
         <a className="back-link" href={import.meta.env.BASE_URL} onClick={toEditor}>
@@ -344,7 +392,7 @@ export function HowItWorks({ onNavigate }: HowItWorksProps) {
       <section className="result">
         <figure>
           <span className="photo-tag">The finished card</span>
-          <img className="photo" src={PLACEHOLDER} alt="The finished, sleeved card" />
+          <img className="photo" src={imgResultFront} alt="The finished, sleeved card" />
           <figcaption>
             <b>What you're making:</b> a finished, sleeved card — ready for the table.
           </figcaption>
@@ -359,17 +407,19 @@ export function HowItWorks({ onNavigate }: HowItWorksProps) {
         <div className="supply-list">
           {SUPPLIES.map((s) => (
             <div className="supply" key={s.id}>
-              <div className="supply-thumb">
-                <img className="photo" src={PLACEHOLDER} alt={s.title} />
-                <button
-                  className="thumb-zoom"
-                  type="button"
-                  aria-label={`View ${s.title} larger`}
-                  onClick={() => setLightbox({ title: s.title, src: PLACEHOLDER })}
-                >
-                  <ZoomIcon />
-                </button>
-              </div>
+              {s.image && (
+                <div className="supply-thumb">
+                  <img className="photo" src={s.image} alt={s.title} />
+                  <button
+                    className="thumb-zoom"
+                    type="button"
+                    aria-label={`View ${s.title} larger`}
+                    onClick={() => setLightbox({ title: s.title, src: s.image! })}
+                  >
+                    <ZoomIcon />
+                  </button>
+                </div>
+              )}
               <div className="supply-text">
                 <h3>{s.title}</h3>
                 <p>{s.note}</p>
@@ -377,17 +427,21 @@ export function HowItWorks({ onNavigate }: HowItWorksProps) {
               {s.link && (
                 <a
                   className="supply-link"
-                  href={TODO_PRODUCT_LINK}
+                  href={s.link.href}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer sponsored"
                 >
                   <ExternalIcon />
-                  {s.link}
+                  {s.link.label}
                 </a>
               )}
             </div>
           ))}
         </div>
+        <p className="supplies-disclaimer">
+          Some links above are affiliate links — buying through them costs you nothing extra, and the
+          proceeds go toward running D&amp;D games.
+        </p>
       </section>
 
       <section className="steps">
@@ -397,7 +451,24 @@ export function HowItWorks({ onNavigate }: HowItWorksProps) {
             key={step.id}
           >
             <div className="step-media">
-              <img className="photo" src={PLACEHOLDER} alt={step.alt} />
+              {step.editorCta ? (
+                <a className="editor-cta" href={import.meta.env.BASE_URL} onClick={toEditor}>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M12 20h9" />
+                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                  </svg>
+                  Open the editor
+                </a>
+              ) : (
+                <img className="photo" src={step.image ?? PLACEHOLDER} alt={step.alt} />
+              )}
             </div>
             <div className="step-body">
               <span className={`step-no${step.optional ? ' is-optional' : ''}`}>{step.badge}</span>
@@ -428,12 +499,7 @@ export function HowItWorks({ onNavigate }: HowItWorksProps) {
         </div>
       </section>
 
-      <footer>
-        Cardsworth · RPG Card Creator —{' '}
-        <a href={import.meta.env.BASE_URL} onClick={toEditor}>
-          back to the editor
-        </a>
-      </footer>
+      <footer>Built with ❤️ for the D&amp;D community</footer>
 
       {lightbox && (
         <div className="lightbox" onMouseDown={(e) => { if (e.target === e.currentTarget) setLightbox(null) }}>

@@ -20,6 +20,10 @@ dist-ssr
 # Local Claude Code settings (per-developer; never commit)
 .claude/settings.local.json
 
+# Personal scratch / drafts (never commit)
+post.txt
+links.txt
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

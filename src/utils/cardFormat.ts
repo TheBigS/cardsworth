@@ -30,6 +30,22 @@ export interface CardFileData {
   masks?: MaskZone[]
 }
 
+// The example card ships with `imageDataUrl` pointing at a bundled asset path
+// rather than base64 (only user-uploaded images go through FileReader). Resolve
+// it to a real data URL so exported YAML is portable outside this deployment.
+export async function resolveImageDataUrl(imageDataUrl: string | null): Promise<string | null> {
+  if (!imageDataUrl || imageDataUrl.startsWith('data:')) return imageDataUrl
+
+  const response = await fetch(imageDataUrl)
+  const blob = await response.blob()
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(reader.result as string)
+    reader.onerror = () => reject(reader.error)
+    reader.readAsDataURL(blob)
+  })
+}
+
 export function exportCardToYaml(card: CardState, includeImage = true): string {
   const cardFile: CardFile = {
     version: CARD_FORMAT_VERSION,

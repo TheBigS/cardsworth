@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import type { CardState } from '../hooks/useCardState'
-import { exportCardToYaml, importCardFromYaml, downloadYaml } from '../utils/cardFormat'
+import { exportCardToYaml, importCardFromYaml, downloadYaml, resolveImageDataUrl } from '../utils/cardFormat'
 
 interface ImportExportProps {
   card: CardState
@@ -10,8 +10,19 @@ interface ImportExportProps {
 export function ImportExport({ card, onImport }: ImportExportProps) {
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  const handleExport = (includeImage: boolean) => {
-    const yaml = exportCardToYaml(card, includeImage)
+  const handleExport = async (includeImage: boolean) => {
+    let exportCard = card
+    if (includeImage && card.imageDataUrl && !card.imageDataUrl.startsWith('data:')) {
+      try {
+        const imageDataUrl = await resolveImageDataUrl(card.imageDataUrl)
+        exportCard = { ...card, imageDataUrl }
+      } catch {
+        alert('Failed to embed image data; exporting without it.')
+        exportCard = { ...card, imageDataUrl: null }
+      }
+    }
+
+    const yaml = exportCardToYaml(exportCard, includeImage)
     const filename = `${card.title || 'card'}.yaml`.replace(/[^a-z0-9-_.]/gi, '-')
     downloadYaml(yaml, filename)
   }
